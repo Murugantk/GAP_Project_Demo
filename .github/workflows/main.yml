@@ -1,8 +1,8 @@
 name: first work flow
 
 
-on: 
-  workflow_dispatch
+on: [push,issues,pull_request]
+  
 
 jobs:
   build:
