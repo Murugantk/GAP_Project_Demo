@@ -2,7 +2,9 @@ name: first work flow
 
 
 on: 
-  workflow_dispatch
+  pull_request:
+    types: opened
+    
   
 
 jobs:
