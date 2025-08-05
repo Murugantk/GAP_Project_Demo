@@ -1,8 +1,9 @@
 name: first work flow
 
+
 on: 
-  schedule:
-    - cron: '* * * * *'
+ pull_request:
+   types: opened
 
 jobs:
   build:
