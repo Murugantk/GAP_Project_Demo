@@ -1,7 +1,8 @@
 name: first work flow
 
 on: 
-  workflow_dispatch
+  schedule:
+    - cron: '* * * * *'
 
 jobs:
   build:
