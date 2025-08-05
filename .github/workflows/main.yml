@@ -1,11 +1,6 @@
 name: first work flow
 
-
-on: 
-  pull_request:
-    types: opened
-    
-  
+on: push 
 
 jobs:
   build:
