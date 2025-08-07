@@ -3,21 +3,17 @@ name: Matrix
 on: workflow_dispatch
 
 jobs:
-  matrix-jobs:
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os:
-          - ubunta-latest
-          - windows -latest
-        java-versions: [17,21]
-    steps:
-    - name: Setup java jdk
-      uses: actions/setup-java@v3.14.1
-      with:
-        java-versions: ${{matrix.java-versions}}
-        distribution: microsoft
-        
-    
-    
-      
+ matrix-jobs:
+  runs-on: ${{matrix.os}}
+  strategy:
+    matrix:
+     os: 
+      - ubuntu-latest
+      - windows-latest
+     java-version: [17,21]
+  steps:
+   - name: Setup Java JDK
+     uses: actions/setup-java@v3.14.1
+     with:
+      java-version: ${{matrix.java-version}}
+      distribution: microsoft
