@@ -15,7 +15,7 @@ jobs:
     - name: Setup java jdk
       uses: actions/setup-java@v3.14.1
       with:
-        java-versions: ${{martix.java-version}}
+        java-versions: ${{martix.java-versions}}
         distribution: microsoft
         
     
