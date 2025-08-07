@@ -1,0 +1,23 @@
+name: Matrix
+
+on: workflow_dispatch
+
+jobs:
+  matrix-jobs:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - ubunta-latest
+          - windows -latest
+        java-versions: [17,20]
+    steps:
+    - name: Setup java jdk
+      uses: actions/setup-java@v3.14.1
+      with:
+        java-versions: ${{martix.java-version}}
+        distribution: microsoft
+        
+    
+    
+      
