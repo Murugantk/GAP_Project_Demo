@@ -10,7 +10,7 @@ jobs:
         os:
           - ubunta-latest
           - windows -latest
-        java-versions: [17,20]
+        java-versions: [17,21]
     steps:
     - name: Setup java jdk
       uses: actions/setup-java@v3.14.1
