@@ -1,0 +1,36 @@
+name: Matrix with Needs and Outputs
+ 
+on:
+  workflow_dispatch
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+    outputs:
+      all_passed: ${{ steps.set-output.outputs.result }}
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+ 
+      - name: Run tests
+        run: |
+          echo "Running tests on Node.js ${{ matrix.node-version }}"
+          # Simulate test result
+          if [ "${{ matrix.node-version }}" == "18" ]; then exit 1; fi
+ 
+      - name: Set output result
+        id: set-output
+        run: echo "result=success" >> $GITHUB_OUTPUT
+ 
+  deploy:
+    needs: test
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy step
+        run: echo "Deploying app since all tests passed!"
