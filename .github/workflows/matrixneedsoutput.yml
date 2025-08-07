@@ -1,40 +1,32 @@
 name: Matrix with Needs and Outputs
  
 on:
-  workflow_dispatch
+  push:
+    branches: [main]
  
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    outputs:
-      build-status: ${{ steps.set-status.outputs.result }}
-    steps:
-      - name: Build Project
-        run: echo "Building project..."
- 
-      - name: Set build result
-        id: set-status
-        run: echo "result=success" >> $GITHUB_OUTPUT
- 
   test:
-    needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [14, 16]
+        os: [ubuntu-latest, windows-latest]
+    outputs:
+      status: ${{ steps.set-result.outputs.result }}
     steps:
-      - name: Use Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Checkout code
+        uses: actions/checkout@v4
  
-      - name: Run Tests
-        run: echo "Running tests on Node ${{ matrix.node-version }}"
+      - name: Run tests
+        run: echo "Running tests on ${{ matrix.os }}..."
+ 
+      - name: Set test result
+        id: set-result
+        run: echo "result=success" >> $GITHUB_OUTPUT
  
   deploy:
-    needs: [test]
+    needs: test
     runs-on: ubuntu-latest
-    if: ${{ success() }}
+    if: needs.test.outputs.status == 'success'
     steps:
-      - name: Deploy
-        run: echo "✅ Deploying App - All tests passed!"
+      - name: Deploying Application
+        run: echo "Deploying application since all tests passed."
