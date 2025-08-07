@@ -11,3 +11,4 @@ jobs:
         echo 'Repository details ${{github.repository}}'
         echo 'Repository Id ${{github.repository_id}}'
         echo 'Actor ${{github.actor}}'
+        echo 'Actor Id ${{github.actor_id}}'
