@@ -13,8 +13,7 @@ jobs:
     steps:
     - name: print
       run: |
-           echo ' ${{secrects.PASSWORD}}
-      
+           echo ' ${{secrets.PASSWORD}}
       env:
         MY_VAR: steps
         
